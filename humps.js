@@ -45,16 +45,26 @@
 
     return string.split(split).join(separator);
   };
+  
+  var _camelizeCache = {};
 
   var camelize = function(string) {
     if (_isNumerical(string)) {
       return string;
     }
-    string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
+    if (_camelizeCache[string]) {
+      return _camelizeCache[string];
+    }
+
+    var camelizedString = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
       return chr ? chr.toUpperCase() : '';
     });
     // Ensure 1st char is always lowercase
-    return string.substr(0, 1).toLowerCase() + string.substr(1);
+    camelizedString = camelizedString.substr(0, 1).toLowerCase() + string.substr(1);
+
+    // Set the cache value and return!
+    _camelizeCache[string] = camelizedString;
+    return camelizedString;
   };
 
   var pascalize = function(string) {
