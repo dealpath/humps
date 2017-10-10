@@ -60,7 +60,7 @@
       return chr ? chr.toUpperCase() : '';
     });
     // Ensure 1st char is always lowercase
-    camelizedString = camelizedString.substr(0, 1).toLowerCase() + string.substr(1);
+    camelizedString = camelizedString.substr(0, 1).toLowerCase() + camelizedString.substr(1);
 
     // Set the cache value and return!
     _camelizeCache[string] = camelizedString;
